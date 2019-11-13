@@ -15,6 +15,6 @@ if [ ! -f package.zip ]
 fi
 
 # ship deployment package to s3
-aws --profile ${AWS_PROFILE} cp ${PACKAGE_NAME} s3://${S3_BUCKET}/${S3_KEY}
+aws --profile ${AWS_PROFILE} s3 cp ${PACKAGE_NAME} s3://${S3_BUCKET}/${S3_KEY}
 
 popd
