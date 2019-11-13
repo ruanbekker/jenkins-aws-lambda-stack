@@ -15,6 +15,8 @@ pipeline {
     AWS_CROSS_ACCOUNT_ROLE_ARN = "arn:aws:iam::$AWS_DEV_ACCOUNT_NUMBER:role/SystemCrossAccountAccess"
     GIT_TOKEN = credentials('GITHUB_TOKEN')
     SLACK_TOKEN_SECRET = credentials('SLACK_TOKEN_SECRET')
+    S3_BUCKET =  "ruanbekker-cfn-assets"
+    S3_KEY = "lambda/MyLambdaFunction/v1/package.zip"
   }
   
   stages{
