@@ -13,6 +13,14 @@ deploy_stack() {
      
   aws --profile ${AWS_PROFILE} cloudformation wait stack-create-complete \
      --stack-name $STACK_NAME
+     
+  stack_status=$(aws --profile ${AWS_PROFILE} cloudformation describe-stacks \
+     --stack-name $STACK_NAME | jq -r '.Stacks[].StackStatus')
+     
+  if [ ${stack_status} == "ROLLBACK_COMPLETE" ]
+    then 
+      exit 1
+  fi
 }
 
 update_stack(){ 
