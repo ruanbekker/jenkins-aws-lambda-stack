@@ -8,6 +8,7 @@ pipeline {
     project_owner = "ruan"
     slack_channel = "system_events"
     AWS_REGION = "eu-west-1"
+    AWS_PROFILE = "dev"
     AWS_DEV_ACCOUNT_NUMBER = credentials('AWS_DEV_ACCOUNT_NUMBER')
     AWS_ACCESS_KEY = credentials('AWS_MASTER_JENKINS_AK')
     AWS_SECRET_KEY = credentials('AWS_MASTER_JENKINS_SK')
