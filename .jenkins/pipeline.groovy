@@ -76,13 +76,15 @@ pipeline {
     
     stage('DeployToProd') {        
       steps{
-        script {          
-          sh '''source bin/setup_aws_environment.sh
-                echo "START [deployment-step]: start of deployment"
-                bash bin/deploy_stack.sh
-                echo "END [deployment-step]: end of deployment"'''
+        script {
+          docker.image('lambci/lambda:build-python3.7').inside('--privileged --user root -e AWS_REGION="eu-west-1"'){
+            sh '''source bin/setup_aws_environment.sh
+                  echo "START [deployment-step]: start of deployment"
+                  bash bin/deploy_stack.sh
+                  echo "END [deployment-step]: end of deployment"'''
+            }
+          }
         }
-      }
       
       post {
         always {
