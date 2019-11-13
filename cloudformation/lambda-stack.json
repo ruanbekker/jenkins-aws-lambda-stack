@@ -63,7 +63,7 @@
             ],
             "Properties": {
                 "Code": {
-                    "S3Bucket": "ruanbekker-cfn-assets",
+                    "S3Bucket": "ruanbekker-cfn-assets-dev",
                     "S3Key": "lambda/MyLambdaFunction/v1/package.zip"
                 },
                 "Role": {
