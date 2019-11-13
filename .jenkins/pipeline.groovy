@@ -26,7 +26,7 @@ pipeline {
           docker.image('lambci/lambda:build-python3.7').inside('--privileged --user root -e AWS_REGION="eu-west-1"'){
             sh '''source bin/setup_aws_environment.sh
                   echo "START [package-step]: start of packaging function"
-                  bash ../bin/package_function.sh
+                  bash bin/package_function.sh
                   echo "END [package-step]: packaging function completed
                '''
           }
@@ -53,7 +53,7 @@ pipeline {
           docker.image('lambci/lambda:build-python3.7').inside('--privileged --user root -e AWS_REGION="eu-west-1"'){
             sh '''source bin/setup_aws_environment.sh
                   echo "START [ship_to_s3-step]: start of shipping package"
-                  bash ../bin/ship_function_to_s3.sh
+                  bash bin/ship_function_to_s3.sh
                   echo "END [package-step]: finished shipping function"
                '''
           }
@@ -79,9 +79,9 @@ pipeline {
       steps{
         script {          
           sh '''source bin/setup_aws_environment.sh
-                echo "START [ship_to_s3-step]: start of shipping package"
-                bash bin/deploy_dummy.sh prod
-                echo "END [ship_to_s3-step]: end of shipping package"
+                echo "START [deployment-step]: start of deployment"
+                bash bin/deploy_stack.sh
+                echo "END [deployment-step]: end of deployment"
              '''
         }
       }
@@ -89,10 +89,8 @@ pipeline {
       post {
         always {
           script {
-            sh '''source bin/setup_aws_environment.sh
-                  echo "START [deployment-step]: start of deployment"
-                  bash ../bin/deploy_stack.sh
-                  echo "END [deployment-step]: end of deployment"
+            sh '''
+                  echo done
                '''
           }
         }
