@@ -3,7 +3,7 @@
 export TEMPLATE=../cloudformation/lambda-stack.json
 export STACK_NAME=lambda-cfn-deployment
 export REGION=eu-west-1
-export AWS_PROFILE=default
+export AWS_PROFILE=dev
 
 deploy_stack() {
   aws --profile ${AWS_PROFILE}  cloudformation create-stack \
