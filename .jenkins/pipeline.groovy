@@ -27,8 +27,7 @@ pipeline {
             sh '''source bin/setup_aws_environment.sh
                   echo "START [package-step]: start of packaging function"
                   bash bin/package_function.sh
-                  echo "END [package-step]: packaging function completed
-               '''
+                  echo "END [package-step]: packaging function completed'''
           }
         }
       }
@@ -54,8 +53,7 @@ pipeline {
             sh '''source bin/setup_aws_environment.sh
                   echo "START [ship_to_s3-step]: start of shipping package"
                   bash bin/ship_function_to_s3.sh
-                  echo "END [package-step]: finished shipping function"
-               '''
+                  echo "END [package-step]: finished shipping function"'''
           }
         }
       }
@@ -81,8 +79,7 @@ pipeline {
           sh '''source bin/setup_aws_environment.sh
                 echo "START [deployment-step]: start of deployment"
                 bash bin/deploy_stack.sh
-                echo "END [deployment-step]: end of deployment"
-             '''
+                echo "END [deployment-step]: end of deployment"'''
         }
       }
       
@@ -90,8 +87,7 @@ pipeline {
         always {
           script {
             sh '''
-                  echo done
-               '''
+                  echo done'''
           }
         }
       }
