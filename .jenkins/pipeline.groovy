@@ -76,15 +76,21 @@ pipeline {
       steps{
         script {          
           sh '''source bin/setup_aws_environment.sh
-                mkdir -p /tmp
-                bash bin/deploy_dummy.sh prod '''
+                echo "START [ship_to_s3-step]: start of shipping package"
+                bash bin/deploy_dummy.sh prod
+                echo "END [ship_to_s3-step]: end of shipping package"
+             '''
         }
       }
       
       post {
         always {
           script {
-            sh '''echo "foo"'''
+            sh '''source bin/setup_aws_environment.sh
+                  echo "START [deployment-step]: start of deployment"
+                  bash ../bin/deploy_stack.sh
+                  echo "END [deployment-step]: end of deployment"
+               '''
           }
         }
       }
