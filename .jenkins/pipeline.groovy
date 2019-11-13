@@ -62,7 +62,7 @@ pipeline {
       post {
         always {
           script {
-            sh '''echo "foo"'''
+            sh '''echo "completed shipping step"'''
           }
         }
         success {
@@ -90,8 +90,15 @@ pipeline {
         always {
           script {
             sh '''
-                  echo done'''
+                  echo "completed deployment step"
+               '''
           }
+        }
+        success {
+          slackSend(channel: "${env.slack_channel}", message: "\n:white_check_mark: *${env.STAGE_NAME} passed*\n\n    Job URL: ${env.JOB_URL}${env.BUILD_NUMBER}\n", iconEmoji: "jenkins", username: "Jenkins")
+        }
+        failure {
+          slackSend(channel: "${env.slack_channel}", message: "\n:red_circle: *${env.STAGE_NAME} ran into testing issues, probably best to check it out*\n\n", iconEmoji: "jenkins", username: "Jenkins")
         }
       }
     }
