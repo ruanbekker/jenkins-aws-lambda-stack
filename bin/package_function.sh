@@ -18,5 +18,5 @@ rm -rf ${venv_id}
 zip -r package.zip .
 
 # cleanup
-#find ${PWD} -type d -maxdepth 1 -mindepth 1 -exec rm -rf {} \;
+find ${PWD} -type d -maxdepth 1 -mindepth 1 -exec rm -rf {} \;
 popd
