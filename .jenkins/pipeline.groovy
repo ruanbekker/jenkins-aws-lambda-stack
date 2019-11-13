@@ -49,7 +49,9 @@ pipeline {
         script {
           docker.image('lambci/lambda:build-python3.7').inside('--privileged --user root -e AWS_REGION="eu-west-1"'){
             sh '''source bin/setup_aws_environment.sh
-                  echo "shipping"
+                  echo "START [ship_to_s3-step]: start of shipping package"
+                  bash ../bin/ship_function_to_s3.sh
+                  echo "END [package-step]: finished shipping function"
                '''
           }
         }
