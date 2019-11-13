@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export TEMPLATE=../cloudformation/lambda-stack.json
+export TEMPLATE=cloudformation/lambda-stack.json
 export STACK_NAME=lambda-cfn-deployment
 export REGION=eu-west-1
 export AWS_PROFILE=${AWS_PROFILE:-none}
