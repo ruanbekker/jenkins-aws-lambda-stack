@@ -55,7 +55,7 @@
                 }
             }
         },
-        "MyLambdaFunctionOne": {
+        "MyLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "DependsOn": [
                 "MyLambdaExecutionRole",
@@ -64,27 +64,7 @@
             "Properties": {
                 "Code": {
                     "S3Bucket": "ruanbekker-cfn-assets",
-                    "S3Key": "lambda/MyLambdaFunctionOne/v1/package.zip"
-                },
-                "Role": {
-                    "Fn::GetAtt": ["MyLambdaExecutionRole", "Arn"]
-                },
-                "Timeout": 60,
-                "Handler": "lambda_function.lambda_handler",
-                "Runtime": "python2.7",
-                "MemorySize": 128
-            }
-        },
-        "MyLambdaFunctionTwo": {
-            "Type": "AWS::Lambda::Function",
-            "DependsOn": [
-                "MyLambdaExecutionRole",
-                "MyLambdaExecutionPolicy"
-            ],
-            "Properties": {
-                "Code": {
-                    "S3Bucket": "ruanbekker-cfn-assets",
-                    "S3Key": "lambda/MyLambdaFunctionTwo/v1/package.zip"
+                    "S3Key": "lambda/MyLambdaFunction/v1/package.zip"
                 },
                 "Role": {
                     "Fn::GetAtt": ["MyLambdaExecutionRole", "Arn"]
