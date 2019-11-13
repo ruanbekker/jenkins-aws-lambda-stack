@@ -10,6 +10,9 @@ deploy_stack() {
      --stack-name $STACK_NAME \
      --region $REGION \
      --template-body file://$TEMPLATE --capabilities CAPABILITY_IAM
+     
+  aws --profile ${AWS_PROFILE} cloudformation wait stack-create-complete \
+     --stack-name $STACK_NAME
 }
 
 update_stack(){ 
