@@ -22,7 +22,9 @@ pipeline {
         script {
           docker.image('lambci/lambda:build-python3.7').inside('--privileged --user root -e AWS_REGION="eu-west-1"'){
             sh '''source bin/setup_aws_environment.sh
-                  echo "building"
+                  echo "START [package-step]: start of packaging function"
+                  bash ../bin/package_function.sh
+                  echo "END [package-step]: packaging function completed
                '''
           }
         }
