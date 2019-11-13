@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-S3_BUCKET="${S3_BUCKET_NAME:-none}"
-S3_KEY="${S3_KEY_NAME:-none}"
+S3_BUCKET="${S3_BUCKET:-none}"
+S3_KEY="${S3_KEY:-none}"
 AWS_PROFILE="${AWS_PROFILE:-none}"
 PACKAGE_NAME="${LAMBDA_PACKAGE_NAME:-package.zip}"
 
