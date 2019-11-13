@@ -27,7 +27,8 @@ pipeline {
             sh '''source bin/setup_aws_environment.sh
                   echo "START [package-step]: start of packaging function"
                   bash bin/package_function.sh
-                  echo "END [package-step]: packaging function completed'''
+                  echo "END [package-step]: packaging function completed"
+               '''
           }
         }
       }
