@@ -16,6 +16,8 @@ publish_version(){
 }
 
 # versioning
+echo "1" > ./tmpfile
+aws --profile ${AWS_PROFILE} s3 cp ./tmpfile s3://${S3_BUCKET}/${S3_KEY}
 get_version
 current_hash=$(md5sum lambda_function.py | awk '{print $1}')
 previous_hash=$(cat ./previous_hash)
