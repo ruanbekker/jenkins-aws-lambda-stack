@@ -26,6 +26,7 @@ if [ $current_hash == $previous_hash ]
 then
   echo "function code did not change"
   function_change=false
+  echo "$current_hash" > ./current_hash
   echo "$function_change" > ./need_to_ship
   exit 0
 else 
