@@ -49,6 +49,8 @@ update_stack(){
      --parameters  ParameterKey=DeploymentPackageKey,ParameterValue=${S3_KEY}
 }
 
+echo "stackstatus"
+aws --profile ${AWS_PROFILE} cloudformation describe-stacks --stack-name ${STACKNAME}
 if aws --profile ${AWS_PROFILE} cloudformation describe-stacks --stack-name ${STACKNAME} >/dev/null 2>&1 
   then
     echo "Stack: ${STACK_NAME} exists, updating stack..."
