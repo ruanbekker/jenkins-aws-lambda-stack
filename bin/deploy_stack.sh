@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -ex
 export TEMPLATE=cloudformation/lambda-stack.json
 export STACK_NAME=lambda-cfn-deployment
 export REGION=eu-west-1
