@@ -4,6 +4,8 @@ export TEMPLATE=cloudformation/lambda-stack.json
 export STACK_NAME=lambda-cfn-deployment
 export REGION=eu-west-1
 export AWS_PROFILE=${AWS_PROFILE:-none}
+export CURRENT_HASH=$(cat ./current_hash)
+export S3_KEY="lambda/MyLambdaFunction/${GIT_COMMIT}/${CURRENT_HASH}.zip"
 
 install_packages() {
   rhel_status_code=$(command -v yum > /dev/null; echo $?)
@@ -24,8 +26,9 @@ deploy_stack() {
   aws --profile ${AWS_PROFILE}  cloudformation create-stack \
      --stack-name $STACK_NAME \
      --region $REGION \
-     --template-body file://$TEMPLATE --capabilities CAPABILITY_IAM
-     
+     --template-body file://$TEMPLATE --capabilities CAPABILITY_IAM \
+     --parameters  ParameterKey=DeploymentPackageKey,ParameterValue=${S3_KEY} 
+
   aws --profile ${AWS_PROFILE} cloudformation wait stack-create-complete \
      --stack-name $STACK_NAME
  
@@ -42,7 +45,8 @@ update_stack(){
   aws --profile ${AWS_PROFILE}  cloudformation update-stack \
      --stack-name $STACK_NAME \
      --region $REGION \
-     --template-body file://$TEMPLATE --capabilities CAPABILITY_IAM
+     --template-body file://$TEMPLATE --capabilities CAPABILITY_IAM \
+     --parameters  ParameterKey=DeploymentPackageKey,ParameterValue=${S3_KEY}
 }
 
 if aws --profile ${AWS_PROFILE} cloudformation describe-stacks --stack-name ${STACKNAME} >/dev/null 2>&1 

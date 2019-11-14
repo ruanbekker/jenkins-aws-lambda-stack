@@ -1,6 +1,12 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "AWS Lambda Stack using CloudFormation",
+    "Parameters" : {
+        "DeploymentPackageKey" : {
+            "Type" : "String",
+            "Default" : "10"
+        }
+    },
     "Resources": {
         "MyLambdaExecutionRole": {
             "Type": "AWS::IAM::Role",
@@ -64,7 +70,7 @@
             "Properties": {
                 "Code": {
                     "S3Bucket": "ruanbekker-cfn-assets-dev",
-                    "S3Key": "lambda/MyLambdaFunction/v1/package.zip"
+                    "S3Key": { "Ref" : "DeploymentPackageKey" } 
                 },
                 "Role": {
                     "Fn::GetAtt": ["MyLambdaExecutionRole", "Arn"]
