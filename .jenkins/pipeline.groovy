@@ -91,6 +91,7 @@ pipeline {
           script {
             sh '''
                   echo "completed deployment step"
+                  bash bin/post_summary.sh
                '''
           }
         }
