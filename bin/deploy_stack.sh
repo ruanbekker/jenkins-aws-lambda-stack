@@ -3,7 +3,7 @@
 export TEMPLATE=cloudformation/lambda-stack.json
 export STACK_NAME=lambda-cfn-deployment
 export REGION=eu-west-1
-export AWS_PROFILE=${AWS_PROFILE:-none}
+#export AWS_PROFILE=${AWS_PROFILE:-none}
 export CURRENT_HASH=$(cat ./current_hash)
 export S3_KEY="lambda/MyLambdaFunction/${GIT_COMMIT}/${CURRENT_HASH}.zip"
 
