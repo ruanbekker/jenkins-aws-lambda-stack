@@ -1,0 +1,7 @@
+FROM lambci/lambda:build-python3.7 as builder
+ADD code/requirements.txt /tmp/requirements.txt
+WORKDIR /var/runtime
+RUN pip3 install --requirement /tmp/requirements.txt --target /var/runtime --upgrade
+
+FROM lambci/lambda:python3.7
+COPY --from=builder /var/runtime /var/runtime

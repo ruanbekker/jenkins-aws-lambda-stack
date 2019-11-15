@@ -20,6 +20,17 @@ pipeline {
   }
   
   stages{
+    stage('TestLambdaFunctio') {
+      steps {
+        script {
+          sh '''echo "START [test-step]: start of testing function"
+                bash bin/test_function.sh
+                echo "END [test-step]: end of testing function"
+             '''
+        }
+      }
+    }
+
     stage('BuildDeploymentPackage') {
       steps {
         script {
@@ -34,11 +45,6 @@ pipeline {
       }
       
       post {
-        always {
-          script {
-            sh '''echo "foo"'''
-          }
-        }
         success {
           slackSend(channel: "${env.slack_channel}", message: "\n:white_check_mark: *${env.STAGE_NAME} passed*\n\n    Job URL: ${env.JOB_URL}${env.BUILD_NUMBER}\n    PR: ${env.GITHUB_PR_URL}\n", iconEmoji: "jenkins", username: "Jenkins")
         }
@@ -56,20 +62,6 @@ pipeline {
                   bash bin/ship_function_to_s3.sh
                   echo "END [package-step]: finished shipping function"'''
           }
-        }
-      }
-      
-      post {
-        always {
-          script {
-            sh '''echo "completed shipping step"'''
-          }
-        }
-        success {
-          slackSend(channel: "${env.slack_channel}", message: "\n:white_check_mark: *${env.STAGE_NAME} passed*\n\n    Job URL: ${env.JOB_URL}${env.BUILD_NUMBER}\n    PR: ${env.GITHUB_PR_URL}\n", iconEmoji: "jenkins", username: "Jenkins")
-        }
-        failure {
-          slackSend(channel: "${env.slack_channel}", message: "\n:red_circle: *${env.STAGE_NAME} ran into testing issues, probably best to check it out*\n\n    PR: ${env.GITHUB_PR_URL}\n", iconEmoji: "jenkins", username: "Jenkins")
         }
       }
     }
